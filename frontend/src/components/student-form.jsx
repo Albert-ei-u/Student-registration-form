@@ -6,10 +6,32 @@ function StudentForm(){
     const [age, setAge]=useState("");
     const [email, setEmail]=useState("");
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
-        console.log({name,age,email});
+        const studentData = {
+            name,
+            age,
+            email,
+        };
         
+        try{
+            const response = await fetch("http://localhost:5000/api/students", {
+                method:"POST",
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                body:JSON.stringify(studentData),
+            });
+            const data = await response.json();
+            console.log("Student saved",data);
+
+            setName("");
+            setAge("");
+            setEmail("");
+        }
+        catch(error){
+            console.error("error:", error);
+        }        
     }
     return(
         <div>

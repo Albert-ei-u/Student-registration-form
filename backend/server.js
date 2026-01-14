@@ -38,7 +38,7 @@ app.post("/api/students", async (req, res)=>{
         res.status(201).json(student);
     }
     catch(err){
-        res.status(500).json({error: err.message});
+        res.status(500).json({error: error.message});
     }
 });
 
